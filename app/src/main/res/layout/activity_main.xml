@@ -7,9 +7,9 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-    <ImageView
+    <me.aboutblanc.gameoflife.BoardView
             android:layout_width="0dp"
-            android:layout_height="0dp" app:srcCompat="@color/colorPrimaryDark" android:id="@+id/imageView"
+            android:layout_height="0dp" app:srcCompat="@color/colorPrimaryDark" android:id="@+id/boardView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintDimensionRatio="h,1:1"

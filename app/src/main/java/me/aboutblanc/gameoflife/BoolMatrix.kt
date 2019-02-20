@@ -14,12 +14,16 @@ class BoolMatrix() {
         mat = Array(m) { Array(n) { false } }
     }
 
-    fun get(i : Int, j : Int) : Boolean {
+    operator fun get(i : Int, j : Int) : Boolean {
         return mat[i][j]
     }
 
-    fun set(i : Int, j : Int, value : Boolean) {
+    operator fun set(i : Int, j : Int, value : Boolean) {
         mat[i][j] = value
+    }
+
+    operator fun get(i : Int) : Array<Boolean> {
+        return mat[i]
     }
 
     fun size() : Pair<Int, Int> {

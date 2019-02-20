@@ -1,10 +1,12 @@
-package me.aboutblanc.cyberpunktv
+package me.aboutblanc.gameoflife
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
 import android.util.AttributeSet
 import android.widget.ImageView
-import me.aboutblanc.gameoflife.BoolMatrix
 
 // Essa view é usada para visualizar um tabuleiro (board) do jogo da vida
 //
@@ -31,10 +33,22 @@ class BoardView(context : Context, attrs: AttributeSet) : ImageView(context, att
         val n = board?.n() ?: 0
         if(board != null && m > 0 && n > 0) {
             board?.let {
+                canvas?.drawColor(Color.WHITE)
+
                 val dx = width/m
                 val dy = height/n
 
-                //TODO: draw
+                paint.color = Color.BLACK
+                for (i in 0 until m) {
+                    for (j in 0 until n) {
+                        val alive = board?.get(i,j) ?: false
+                        if(alive) {
+                            rect.set(i*dx, j*dy, (i+1)*dx, (j+1)*dy)
+                            canvas?.drawRect(rect, paint)
+                        }
+
+                    }
+                }
             }
         } else {
             canvas?.drawPaint(paint)
