@@ -15,6 +15,7 @@ import android.widget.ImageView
 
 class BoardView(context : Context, attrs: AttributeSet) : ImageView(context, attrs) {
     private var board : BoolMatrix? = null
+    private var drawGridEnabled = true
 
     // Public functions
     fun setBoard(board : BoolMatrix?) {
@@ -31,17 +32,21 @@ class BoardView(context : Context, attrs: AttributeSet) : ImageView(context, att
 
         val m = board?.m() ?: 0
         val n = board?.n() ?: 0
-        if(board != null && m > 0 && n > 0) {
-            board?.let {
+        if(m > 0 && n > 0) {
+            board?.let { board ->
                 canvas?.drawColor(Color.WHITE)
+                if(drawGridEnabled) {
+                    drawGrid(canvas)
+                }
 
                 val dx = width/m
                 val dy = height/n
 
                 paint.color = Color.BLACK
+                paint.style = Paint.Style.FILL
                 for (i in 0 until m) {
                     for (j in 0 until n) {
-                        val alive = board?.get(i,j) ?: false
+                        val alive = board[i, j]
                         if(alive) {
                             rect.set(i*dx, j*dy, (i+1)*dx, (j+1)*dy)
                             canvas?.drawRect(rect, paint)
@@ -58,5 +63,34 @@ class BoardView(context : Context, attrs: AttributeSet) : ImageView(context, att
             paint.textAlign = Paint.Align.CENTER
             canvas?.drawText("Board not provided", (width/2).toFloat(), (height/2).toFloat(), paint)
         }
+    }
+
+    private fun drawGrid(canvas : Canvas?) {
+        paint.color = Color.GRAY
+        paint.strokeWidth = 0f
+        paint.style = Paint.Style.STROKE
+        paint.isAntiAlias = false
+
+        board?.let { board ->
+            val m = board.m()
+            val n = board.n()
+            val dx = width/m
+            val dy = width/n
+
+            for(i in 0 .. m) {
+                canvas?.drawLine(
+                    (i*dx).toFloat(), 0f,
+                    (i*dx).toFloat(), (m*dx).toFloat(),
+                    paint )
+            }
+
+            for(j in 0 .. n) {
+                canvas?.drawLine(
+                    0f, (j*dy).toFloat(),
+                    (n*dy).toFloat(), (j*dy).toFloat(),
+                    paint )
+            }
+        }
+
     }
 }
