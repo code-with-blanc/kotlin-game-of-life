@@ -32,4 +32,13 @@ class BoolMatrix() {
 
     fun m() : Int = size().first
     fun n() : Int = size().second
+
+    fun asArray() : Array<Boolean> {
+        val ret = mutableListOf<Boolean>()
+        for(i in 0 until m()) {
+            ret += mat[i]
+        }
+
+        return ret.toTypedArray()
+    }
 }

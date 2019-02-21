@@ -7,8 +7,8 @@ import java.util.*
 import kotlin.concurrent.fixedRateTimer
 
 class MainActivity : AppCompatActivity() {
-    private var board = BoolMatrix(20, 20)
     private val cps = 2
+    private lateinit var game : Game
 
     private var loopTimer : Timer? = null
 
@@ -36,31 +36,19 @@ class MainActivity : AppCompatActivity() {
 
     //Roda uma vez ao iniciar a activity
     private fun setup() {
-        board[0][0] = true
-
-        boardView.setBoard(board)
+        game = Game(10,10)
     }
 
     //Roda cps vezes por segundo
     private fun loop() {
-        val nextBoard = BoolMatrix(board.m(), board.n())
+        game.nextGeneration()
 
-        for (i in 0 until board.m()) {
-            for (j in 0 until board.n()) {
-                if(i >= 1) {
-                    if(board[i-1][j]) {
-                        nextBoard[i][j] = true
-                    }
-                }
-            }
-        }
-
-        board = nextBoard
-        boardView.setBoard(nextBoard)
+        boardView.setBoard(game.getBoard())
     }
 
     private fun onButtonClicked() {
-        board[0][0] = true
-        boardView.setBoard(board)
+        game.clearBoard()
+        game.makeCellAlive(0,0)
+        boardView.setBoard(game.getBoard())
     }
 }
