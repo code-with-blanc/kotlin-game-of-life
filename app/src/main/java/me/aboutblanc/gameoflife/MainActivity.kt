@@ -1,5 +1,6 @@
 package me.aboutblanc.gameoflife
 
+import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
@@ -12,11 +13,15 @@ class MainActivity : AppCompatActivity() {
 
     private var loopTimer : Timer? = null
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        button1.setOnClickListener { onButtonClicked() }
+        button1.text = "Me aperte"
+        button1.setOnClickListener { button1() }
+        button2.text = "Reset"
+        button2.setOnClickListener { button2() }
     }
 
     override fun onResume() {
@@ -46,9 +51,14 @@ class MainActivity : AppCompatActivity() {
         boardView.setBoard(game.getBoard())
     }
 
-    private fun onButtonClicked() {
+    private fun button1 () {
         game.clearBoard()
         game.makeCellAlive(5,5)
         boardView.setBoard(game.getBoard())
     }
+
+    private fun button2 () {
+        game.clearBoard()
+    }
+
 }
