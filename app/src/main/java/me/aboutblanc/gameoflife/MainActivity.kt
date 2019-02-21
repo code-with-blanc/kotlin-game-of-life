@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun onButtonClicked() {
         game.clearBoard()
-        game.makeCellAlive(0,0)
+        game.makeCellAlive(5,5)
         boardView.setBoard(game.getBoard())
     }
 }

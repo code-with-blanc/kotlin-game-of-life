@@ -17,7 +17,14 @@ class Game(val m : Int, val n : Int) {
     }
 
     fun nextGeneration() {
-
+        for(i in 1 until board.m()) {
+            for(j in 0 until board.n()) {
+                if(board[i][j] == ALIVE) {
+                    board[i][j] = DEAD
+                    board[i-1][j] = ALIVE
+                }
+            }
+        }
     }
 
     fun makeCellAlive(i: Int, j: Int) {
