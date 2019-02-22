@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     //Roda uma vez ao iniciar a activity
     private fun setup() {
-        game = Game(10,10)
+        game = Game(20,20)
     }
 
     //Roda cps vezes por segundo
@@ -59,6 +59,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun button2 () {
         game.clearBoard()
+
+        game.makeCellAlive(1,1)
+        game.makeCellAlive(2,2)
+        game.makeCellAlive(3,3)
     }
 
 }

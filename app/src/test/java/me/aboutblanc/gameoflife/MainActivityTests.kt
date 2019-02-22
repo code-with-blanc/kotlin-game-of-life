@@ -30,8 +30,53 @@ class MainActivityTests {
         assert(numberOfLivingCells() == 0)
     }
 
+    @Test fun contarVizinhos1() {
+        //Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+        game.makeCellAlive(1,1)
+        game.makeCellAlive(1,3)
+
+        var cont = game.countNeighbor(2, 2)
+
+        assert(cont == 2)
+    }
+
+    @Test fun contarVizinhos2() {
+        //Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+        game.makeCellAlive(1,1)
+        game.makeCellAlive(1,3)
+        game.makeCellAlive(2,2)
+
+        var cont = game.countNeighbor(2, 2)
+
+        assert(cont == 2)
+    }
+
+    @Test fun contarVizinhos3() {
+        //Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+        game.makeCellAlive(1,1)
+        game.makeCellAlive(1,3)
+        game.makeCellAlive(2,2)
+
+        var cont = game.countNeighbor(0, 0)
+
+        assert(cont == 1)
+    }
+
+    @Test fun contarVizinhos4() {
+        //Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+        var board = game.getBoard()
+        //game.makeCellAlive(board.m()-1,board.n()-1)
+        game.makeCellAlive(board.m()-2, board.n()-1)
+        game.makeCellAlive(board.m()-1, board.n()-2)
+
+        var cont = game.countNeighbor(board.m()-1,board.n()-1)
+
+        assert(cont == 2)
+    }
+
     @Test fun regra2_2vizinhos() {
         //Any live cell with two or three live neighbours lives on to the next generation.
+        //2 ou + vizinhos vive
         game.makeCellAlive(1,1)
         game.makeCellAlive(2,2)
         game.makeCellAlive(3,3)
